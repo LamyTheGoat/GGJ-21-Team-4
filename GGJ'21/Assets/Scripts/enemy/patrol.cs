@@ -11,6 +11,12 @@ public class patrol : MonoBehaviour
     public Transform player;
     private bool movingR = true;
     public Transform groundDetection;
+    private CharacterController2D charController;
+
+    private void Start()
+    {
+        charController = GetComponent<CharacterController2D>();
+    }
 
     private void Update()
     {
@@ -35,20 +41,13 @@ public class patrol : MonoBehaviour
         }
         else
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+
             if (groundInfo.collider == false)
             {
-                if (movingR == true)
-                {
-                    transform.eulerAngles = new Vector3(0, -180, 0);
-                    movingR = false;
-                }
-                else
-                {
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    movingR = true;
-                }
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
             }
+            charController.Move(transform.localScale.x/Mathf.Abs(transform.localScale.x) *speed * Time.fixedDeltaTime, false, false);
         }
     }
 
@@ -56,15 +55,17 @@ public class patrol : MonoBehaviour
     {
         if (transform.position.x < player.position.x)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            transform.Translate(Vector2.right * ChaseSpeed * Time.deltaTime);
+            int coef = transform.localScale.x < 0 ? -1 : 1;
+            transform.localScale = new Vector3(transform.localScale.x * coef, transform.localScale.y, transform.localScale.z);
+            
         }
         else
         {
-            transform.eulerAngles = new Vector3(0, -180, 0);
-            transform.Translate(Vector2.right * ChaseSpeed * Time.deltaTime);
+            int coef = transform.localScale.x > 0 ? -1 : 1;
+            transform.localScale = new Vector3(transform.localScale.x * coef, transform.localScale.y, transform.localScale.z);
 
         }
+        charController.Move(transform.localScale.x/Mathf.Abs(transform.localScale.x) * ChaseSpeed * Time.fixedDeltaTime, false, false);
 
     }
 }

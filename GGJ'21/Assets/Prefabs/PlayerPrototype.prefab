@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4284982603457243896}
   - component: {fileID: 4284982603457243899}
   m_Layer: 7
-  m_Name: PlayerPrototype 1
+  m_Name: PlayerPrototype
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 40
+  dust: {fileID: 1931481589550322220, guid: a121ba02822b9fb488da227193794abc, type: 3}
 --- !u!114 &4284982603457243896
 MonoBehaviour:
   m_ObjectHideFlags: 0
