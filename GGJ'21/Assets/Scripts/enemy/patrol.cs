@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class patrol : MonoBehaviour
 {
-    public float speed;
+    public float speed=2;
+    public float ChaseSpeed=4;
     public float agroRange=5;
     public Transform player;
     private bool movingR = true;
@@ -13,7 +14,7 @@ public class patrol : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 2f);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, 2f, LayerMask.GetMask("GroundAndPatrol"));
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (distanceToPlayer < agroRange)
@@ -56,12 +57,12 @@ public class patrol : MonoBehaviour
         if (transform.position.x < player.position.x)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Vector2.right * ChaseSpeed * Time.deltaTime);
         }
         else
         {
             transform.eulerAngles = new Vector3(0, -180, 0);
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Vector2.right * ChaseSpeed * Time.deltaTime);
 
         }
 
