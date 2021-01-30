@@ -6,7 +6,7 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [SerializeField] private GameObject parent;
-    [SerializeField] private float damage = 10;
+    public float damage = 10;
 
     public void Start()
     {
