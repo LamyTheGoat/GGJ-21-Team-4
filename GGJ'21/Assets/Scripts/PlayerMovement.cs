@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 40f;
     private CharacterController2D charController;
     private bool jump;
+    public ParticleSystem dust;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
         if(Input.GetKeyDown((KeyCode.Space)))
         {
+            CreateDust();
             jump = true;
         }
 
@@ -29,5 +31,9 @@ public class PlayerMovement : MonoBehaviour
     {
         charController.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
+    }
+    private void CreateDust()
+    {
+        dust.Play();
     }
 }
