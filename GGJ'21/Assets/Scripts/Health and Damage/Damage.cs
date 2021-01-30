@@ -7,6 +7,7 @@ public class Damage : MonoBehaviour
 {
     [SerializeField] private GameObject parent;
     public float damage = 10;
+    public float punchForce;
 
     public void Start()
     {
@@ -23,7 +24,14 @@ public class Damage : MonoBehaviour
             Damageable d = other.gameObject.GetComponent<Damageable>();
             if (d != null)
             {
-                d.TakeDamage(damage);
+                if (punchForce > 0)
+                {
+                    d.TakeDamage(damage, transform.position, punchForce);
+                }
+                else
+                {
+                    d.TakeDamage(damage);
+                }
             }
         }
     }
