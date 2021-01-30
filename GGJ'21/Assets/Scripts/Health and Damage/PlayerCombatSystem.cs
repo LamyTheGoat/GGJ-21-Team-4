@@ -18,6 +18,8 @@ public class PlayerCombatSystem : MonoBehaviour
 
      private String currentPosition;
      private int currentPosIndex = 1;
+
+     [SerializeField] private GameObject attackReadyIndicator;
      
 
 
@@ -40,6 +42,11 @@ public class PlayerCombatSystem : MonoBehaviour
         {
             damageObject.GetComponent<Damage>().damage -= heavymodifier;
             damageObject.SetActive(false);
+        }
+
+        if (Time.time > attackableTime)
+        {
+            attackReadyIndicator.SetActive(true);
         }
     }
 
@@ -142,6 +149,7 @@ public class PlayerCombatSystem : MonoBehaviour
         float attackMovement = heavy ? movementInAttack * 2.5f : movementInAttack;
         attackDissappearTime = Time.time + 0.15f;
         float attackCooldownModifier = heavy ? 0.6f : 0;
+        attackReadyIndicator.SetActive(false);
         attackableTime = Time.time + attackCoolDown +attackCooldownModifier;
         GetComponent<CharacterController2D>().Move(attackMovement * transform.localScale.x, false, false);
 
