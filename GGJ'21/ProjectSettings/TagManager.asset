@@ -52,6 +52,9 @@ TagManager:
   - name: Decorative Layer Back
     uniqueID: 3653206545
     locked: 0
+  - name: Ground Layer
+    uniqueID: 2718735113
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
